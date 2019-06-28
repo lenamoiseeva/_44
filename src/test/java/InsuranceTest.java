@@ -1,16 +1,21 @@
+import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Wait;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import static org.junit.Assert.*;
 import java.util.concurrent.TimeUnit;
 
 public class InsuranceTest {
-
     @Test
+    @Ignore
     public void Autotest() {
         System.setProperty("webdriver.chrome.driver", "drv/chromedriver.exe");
-        ChromeDriver driver = new ChromeDriver();
+        WebDriver driver = new ChromeDriver();
         driver.get("https://www.sberbank.ru/ru/person");
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         driver.manage().window().maximize();
@@ -25,9 +30,12 @@ public class InsuranceTest {
 
             driver.switchTo().window(winHandle);
         }
+        Wait<WebDriver> wait = new WebDriverWait(driver, 5, 1000);
+        wait.until(ExpectedConditions.elementToBeClickable(driver.findElement
+                (By.xpath("//*[contains(text(),'Минимальная')]")))).click();
 
         driver.findElement(By.xpath("//div[text()='Минимальная']")).click();
-        driver.findElement(By.xpath("//*[contains(text(),'Оформить')]")).click();
+        driver.findElement(By.xpath("//[contains(text(),'Оформить')]")).click();
 
         driver.findElement(By.name("insured0_surname")).sendKeys("PETROV");
         driver.findElement(By.name("insured0_name")).sendKeys("MAXIM");
@@ -39,7 +47,7 @@ public class InsuranceTest {
         driver.findElement(By.name("middlename")).sendKeys("Петрович");
         driver.findElement(By.name("birthDate")).click();
         driver.findElement(By.name("birthDate")).sendKeys("12.12.1986");
-        driver.findElement(By.name("male")).click();
+        driver.findElement(By.cssSelector("input[class='b-radio-field-entity ng-pristine ng-untouched ng-valid']")).click();
 
         driver.findElement(By.name("passport_series")).click();
         driver.findElement(By.name("passport_series")).sendKeys("9710");
