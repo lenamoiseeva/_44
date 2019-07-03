@@ -1,8 +1,9 @@
-
 package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
@@ -11,6 +12,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class SecondPage {
     WebDriver driver;
 
+    @FindBy(xpath = "//P[@class='kit-button kit-button_color_green kit-button_size_m']")
+    public WebElement SendButton;
+
+
     public SecondPage(WebDriver driver) {
         PageFactory.initElements(driver,this);
         this.driver = driver;
@@ -18,7 +23,6 @@ public class SecondPage {
 
     public void switchWindows(){
         for (String winHandle : driver.getWindowHandles()) {
-
             driver.switchTo().window(winHandle);
         }
     }

@@ -7,7 +7,6 @@ import org.openqa.selenium.support.PageFactory;
 
 
 public class SendAppPage {
-    WebDriver driver;
 
     @FindBy(name = "insured0_surname")
     public WebElement insured_surname;
@@ -78,6 +77,35 @@ public class SendAppPage {
                 throw new AssertionError("Поле '"+fieldName+"' не объявлено на странице");
         }
     }
+
+    public String getFillField(String fieldName){
+        switch (fieldName){
+            case  "Фамилия застрахованного":
+                return insured_surname.getAttribute("value");
+            case  "Имя застрахованного":
+                return insured_name.getAttribute("value");
+            case  "Дата рождения застрахованного":
+                return insured_birthDate.getAttribute("value");
+            case  "Фамилия":
+                return surname.getAttribute("value");
+            case  "Имя":
+                return name.getAttribute("value");
+            case  "Отчество":
+                return middlename.getAttribute("value");
+            case  "Дата рождения":
+                return birthDate.getAttribute("value");
+            case "Серия паспорта":
+                return passport_series.getAttribute("value");
+            case "Номер паспорта":
+                return passport_number.getAttribute("value");
+            case "Дата выдачи":
+                return issueDate.getAttribute("value");
+            case "Кем выдан":
+                return issuePlace.getAttribute("value");
+        }
+        throw new AssertionError("Поле не объявлено на странице");
+    }
+
 
 
     public void fillField(WebElement element, String value) {

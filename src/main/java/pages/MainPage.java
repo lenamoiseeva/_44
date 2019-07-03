@@ -12,7 +12,8 @@ public class MainPage {
     WebDriver driver;
 
     @FindBy(xpath = "//ul[contains(@class,'lg-menu__list')]")
-    WebElement MainMenu;
+    public WebElement MainMenu;
+
 
     public MainPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
@@ -27,9 +28,5 @@ public class MainPage {
 
     public void selectSubMenu (String subMenuItem) {
         MainMenu.findElement(By.xpath("//*[contains(text(),'" +subMenuItem+ "')]")).click();
-    }
-
-    public void clickButton (String ItemName) {
-        MainMenu.findElement(By.xpath("//*[contains(text(),'" +ItemName+ "')]")).click();
     }
 }
